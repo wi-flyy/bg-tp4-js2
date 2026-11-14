@@ -1,95 +1,80 @@
-"use strict"
-let total_points = 0 ;
+"use strict" // Mode strict (slide 51)
+let total_points = 0 ; // Variable globale déclarée avec let (slide 51)
 
 let lignes = 0 ;
 
-const persons = [
+const persons = [ // Tableau d'objets (slide 40), const (slide 51)
     { nom: "nom-1", prenom: "prenom-1", points: 5 },
     { nom: "nom-2", prenom: "prenom-2", points: 10 },
     { nom: "nom-3", prenom: "prenom-3", points: 15 }
 
 ];
 
-//apple de Init()
-init() ;
+init() ; // Appel de fonction (slide 45)
 
-function init(){
-    for (const person of persons){
+function init(){ // Déclaration de fonction (slide 45)
+    for (const person of persons){ // Boucle for..of (slide 44)
 
-        doInsert(person.nom, person.prenom, person.points) ;
+        doInsert(person.nom, person.prenom, person.points) ; // Appel de fonction avec les propriétés de l'objet courant (slides 39 et 45)
     }
 }
 
-function doInsert(nom, prenom, points){
-    lignes++ ;
-    total_points += points;
-    const num = lignes ;
-     
-    doInsertRowTable(num, nom, prenom, points);
+function doInsert(nom, prenom, points){ // Déclaration de fonction (slide 45)
+    lignes++ ; // Opérateur d'incrémentation/décrémentation (slide 41)
+    total_points += points; // Opérateur combiné (slide 41)
+    const num = lignes ; // Affectation (slide 36)
+
+    doInsertRowTable(num, nom, prenom, points); // Appel de fonction (slide 45)
 
     update_summary();
 }
 
-function update_summary(){
-    // Récupérer l'élément id = p1
-    const element_lignes = document.getElementById("p1");
- 
-    // Récupérer l'élément id = p3
+function update_summary(){ // Déclaration de fonction (slide 45)
+    const element_lignes = document.getElementById("p1"); // getElementById (slides 61 à 63)
+
     const element_points = document.getElementById("p3");
- 
-    // Avec innerText, afficher le nombre de lignes 
-    element_lignes.innerText = lignes + " ligne(s)";
- 
-    // Avec innerText, afficher le total des points 
+
+    element_lignes.innerText = lignes + " ligne(s)"; // innerText (slide 91), opérateur + (slide 41)
+
     element_points.innerText = "Total point(s)= " + total_points;
- 
+
 }
 
-function consoleTableau(){
-    console.log(persons);
+function consoleTableau(){ // Déclaration de fonction (slide 45)
+    console.log(persons); // console.log (slide 33)
 }
 
-function doInsertRowTable(num , nom , prenom , points){
-    const table = document.getElementById("table_persons");
+function doInsertRowTable(num , nom , prenom , points){ // Déclaration de fonction (slide 45)
+    const table = document.getElementById("table_persons"); // getElementById (slides 61 à 63)
 
-    //cree la ligne <tr>
-    const tr = document.createElement("tr");
+    const tr = document.createElement("tr"); // createElement (slide 104)
 
-    //cree la cellule <td>
     const td_num = document.createElement("td");
-    td_num.setAttribute("class" ,"col_text");
+    td_num.setAttribute("class" ,"col_text"); // setAttribute (slide 107)
 
-     // Créer 5 éléments de type td (colonnes de tableau)
-    const col1 = document.createElement("td");
+    const col1 = document.createElement("td"); // createElement (slide 104)
     const col2 = document.createElement("td");
     const col3 = document.createElement("td");
     const col4 = document.createElement("td");
     const col5 = document.createElement("td");
-  
-    // Remplir le contenu de chaque colonne avec les paramètres 
-    col1.innerText = num;
+
+    col1.innerText = num; // innerText (slide 91)
     col2.innerText = nom;
     col3.innerText = prenom;
     col4.innerText = points;
-    
-    // La dernière colonne contient un élément input de type checkbox
-    const checkbox = document.createElement("input");
-    checkbox.setAttribute("type", "checkbox");
-    col5.append(checkbox);
-   
-    // Affecter les classes correspondantes à chaque colonne
-    col1.setAttribute("class", "col_number");
+
+    const checkbox = document.createElement("input"); // createElement (slide 104)
+    checkbox.setAttribute("type", "checkbox"); // setAttribute (slide 107)
+    col5.append(checkbox); // append() (slide 98)
+
+    col1.setAttribute("class", "col_number"); // setAttribute (slide 107)
     col2.setAttribute("class", "col_text");
     col3.setAttribute("class", "col_text");
     col4.setAttribute("class", "col_number");
     col5.setAttribute("class", "col_chkbox");
 
+    tr.append(col1, col2, col3, col4, col5); // append() (slide 98)
 
-    // Ajouter les colonnes à la ligne
-    tr.append(col1, col2, col3, col4, col5);
-
-   // Rajouter la ligne row au tableau table (slide ??)
     table.append(tr);
 
 }
-
